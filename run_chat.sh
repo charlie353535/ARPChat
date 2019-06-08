@@ -47,16 +47,25 @@ if [ $(pip3 list 2> /dev/null| grep -c scapy) -lt 1 ]
 		sudo pip3 install --pre scapy
 fi
 
+if [ $(pip3 list 2> /dev/null| grep -c readchar) -lt 1 ]
+        then
+                echo "READCHAR isn't installed! Installing now.."
+                sudo pip3 install readchar
+fi
+
+
 echo -n "Your name (One Word): "
 read name
 echo
 
 export NAME="$name"
 
+export CODE="XX"
+
 echo "split" >> screentemp
-echo "screen /bin/bash -c 'sudo ./rx_arp.py -d'" >> screentemp
+echo "screen /bin/bash -c 'sudo ./rx_arp.py -d -c$CODE'" >> screentemp
 echo "focus" >> screentemp
-echo "screen /bin/bash -c 'sudo ./tx_arp.py -d $NAME'" >> screentemp
+echo "screen /bin/bash -c 'sudo ./tx_arp.py -d -c$CODE $NAME'" >> screentemp
 echo 'caption string "ARPChat, Charlie Camilleri 2019"' >> screentemp
 
 screen -c screentemp

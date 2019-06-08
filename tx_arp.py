@@ -8,7 +8,7 @@ import sys
 KEY = [0xDE,0xAD] # Encryption key!
 
 if (len(sys.argv) < 2):
- print("usage: ./tx_arp.py <filename to send>")
+ print("usage: ./tx_arp.py [ <filename> | -d ] [ -c ]")
  exit(1)
 
 name="NONAME"
@@ -19,16 +19,27 @@ if len(sys.argv) == 3:
 buf = bytearray()
 direct=False
 
-if sys.argv[1] != "-d":
- with open(sys.argv[1], 'rb') as f:
-  buf = f.read()
-else:
+PAIRCODE = bytearray([0,0])
+
+chat = False
+
+if sys.argv[2][0:2] == "-c":
+ chat = True
+ PAIRCODE[0] = ord(sys.argv[2][2])
+ PAIRCODE[1] = ord(sys.argv[2][3])
+
+ name = sys.argv[3]
+
+if sys.argv[1] == "-d":
  print("Starting in DIRECT mode!")
  if name=="NONAME":
   name=input("Your Name (for -d chat mode): ")
  print("Just type your message and press [ENTER] to send it!")
  print("")
  direct=True
+else:
+ with open(sys.argv[1], 'rb') as f:
+  buf = f.read()
 
 if not direct:
  buf = bytearray(buf)
@@ -45,6 +56,16 @@ def construct_ip(data):
   if i != 3:
    out=out+"."
  return out
+
+def sigint_handle(sig,frame):
+ print("SIGINT Triggered, exiting")
+ if chat:
+  dip = construct_ip([0xFF,0xFD,PAIRCODE[0],PAIRCODE[1]])
+  sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') / Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
+ sys.exit(0)
+
+import signal
+signal.signal(signal.SIGINT, sigint_handle)
 
 if not direct:
 	for i in range(0,length,2):

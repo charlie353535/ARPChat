@@ -13,4 +13,5 @@ The script installs the following packages:
   tcpdump<br>
   python3<br>
   python3-pip<br>
-  scapy</code>
+  scapy<br>
+  readchar</code>
