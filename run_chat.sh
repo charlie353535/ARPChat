@@ -60,7 +60,7 @@ echo
 
 export NAME="$name"
 
-export CODE="XX"
+export CODE=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)
 
 echo "split" >> screentemp
 echo "screen /bin/bash -c 'sudo ./rx_arp.py -d -c$CODE'" >> screentemp
@@ -71,3 +71,5 @@ echo 'caption string "ARPChat, Charlie Camilleri 2019"' >> screentemp
 screen -c screentemp
 
 rm screentemp
+
+
