@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 echo "==ARPChat, Charlie Camilleri 2019=="
 
 # check for and download scripts
