@@ -42,8 +42,8 @@ def handle_cmd(tip):
   else:
    print(str(chr(tip[2]^KEY[0]))+str(chr(tip[3]^KEY[1])),end='')
 
-  buf.append(tip[2])
-  buf.append(tip[3])
+  buf.append(tip[2]^KEY[0])
+  buf.append(tip[3]^KEY[1])
   return
 
  if tip[0] == 0xFF and tip[1] == 0xFF:
