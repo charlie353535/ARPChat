@@ -56,6 +56,9 @@ if not direct:
 	print("Sending EOF")
 	send(ARP(op=1, psrc="10.101.7.149", pdst=dip))
 
+MAC_SRC = '70:10:6f:8f:03:00'  #'c4:9d:ed:2a:df:46'
+IP_SRC = '10.101.15.254'
+
 if direct:
  while True:
   buf = bytearray(str("["+name+"] "+input("=> ")+"\n").encode('ascii'))
@@ -66,8 +69,9 @@ if direct:
 
   for i in range(0,length,2):
    dip = construct_ip([0xFF,0xFE,buf[i]^KEY[0],buf[i+1]^KEY[1]])
-   send(ARP(op=1, psrc="10.101.7.149", pdst=dip),verbose=0)
+   sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') /Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
 
   dip = construct_ip([0xFF,0xFF,0x00,0x00])
-  send(ARP(op=1, psrc="10.101.7.149", pdst=dip),verbose=0)
+  sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') / Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
+
 
