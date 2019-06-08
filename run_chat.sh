@@ -17,6 +17,12 @@ if [ $(ls -al | grep -c "tx_arp.py") -lt 1 ]
 		chmod 777 tx_arp.py
 fi
 
+#Check for screen
+if [ $(dpkg-query -l screen | grep screen -c) -lt 1 ]
+	then
+		echo "SCREEN isn't installed! Installing now.."
+		sudo apt install -y screen
+fi
 
 #Check for python3
 if [ $(dpkg-query -l python3 | grep python3 -c) -lt 1 ]
