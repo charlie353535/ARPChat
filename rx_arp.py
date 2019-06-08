@@ -17,9 +17,10 @@ if len(sys.argv) > 1:
   print(" ")
   direct=True
 
-if (sys.argv[2][0:2]) == "-c":
- PAIRCODE[0] = ord(sys.argv[2][2])
- PAIRCODE[1] = ord(sys.argv[2][3])
+if len(sys.argv) >2:
+ if (sys.argv[2][0:2]) == "-c":
+  PAIRCODE[0] = ord(sys.argv[2][2])
+  PAIRCODE[1] = ord(sys.argv[2][3])
 
 
 OUTFILE = "out.txt"
