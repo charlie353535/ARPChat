@@ -88,7 +88,7 @@ if direct:
    buf.append(0)
    length=length+1
 
-  print("\033[s\033[1;0H\u001b[41mTRANSMITTING...              ")
+  print("\033[s\033[1;0H\u001b[41mTRANSMITTING...         ")
 
   for i in range(0,length,2):
    print("\033[1;20H"+str(round((i/length)*100))+"%")
@@ -98,4 +98,4 @@ if direct:
   dip = construct_ip([0xFF,0xFF,0x00,0x00])
   sendp(Ether(src=MAC_SRC,dst='ff:ff:ff:ff:ff:ff') / ARP(op=1, psrc=IP_SRC, pdst=dip,hwsrc=MAC_SRC,hwdst='00:00:00:00:00:00') / Raw(load="\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"),verbose=0)
 
-  print("\033[1;0H\u001b[42mDONE.                        \033[u\033[1A\u001b[0m")
+  print("\033[1;0H\u001b[42mDONE.                   \033[u\033[1A\u001b[0m")
