@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Copyright Charlie Camilleri, 2019
+
 clear
 
 echo "==ARPChat, Charlie Camilleri 2019=="
@@ -64,7 +66,7 @@ export NAME="$name"
 export CODE=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)
 
 
-echo -n "Channel Key (16 chars OR [R] for random key OR [D] for default key): "
+echo -n "AES Channel Key (16 chars OR [R] for random key OR [D] for default key): "
 read KEY
 
 if [[ $KEY =~ ^[Rr]$ ]]
@@ -77,7 +79,13 @@ if [[ $KEY =~ ^[Rr]$ ]]
 			then
 				export CH_KEY="0000000000000000"
 			else
-				export CH_KEY="$KEY"
+				if [ ${#KEY} -ne 16 ]
+					then
+						echo "ERROR! Use a 16 char key!"
+						exit
+				else
+					export CH_KEY="$KEY"
+				fi
 		fi
 fi
 
