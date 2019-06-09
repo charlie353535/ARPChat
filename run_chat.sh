@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Charlie Camilleri, 2019
+# Copyright Charlie Camilleri, 2019
 
 clear
 
