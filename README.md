@@ -17,7 +17,7 @@ The script installs the following packages:
   scapy<br>
   pycryptodome</code>
 
-[![DepShield Badge](https://depshield.sonatype.org/badges/cvdcamilleri/ARPChat/depshield.svg)](https://depshield.github.io)
+[![DepShield Badge](https://depshield.sonatype.org/badges/cvdcamilleri/arpchat/depshield.svg)](https://depshield.github.io)
 
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
