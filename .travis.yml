@@ -5,8 +5,8 @@ cache: pip
 addons:
   apt:
     packages:
-      - "python3.6"
-      - "python3.6-pip"
+      - "python3"
+      - "python3-pip"
 
 install:
   - sudo pip3 install --pre scapy
