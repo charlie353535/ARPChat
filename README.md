@@ -16,3 +16,5 @@ The script installs the following packages:
   python3-pip<br>
   scapy<br>
   pycryptodome</code>
+
+[![DepShield Badge](https://depshield.sonatype.org/badges/owner/repository/depshield.svg)](https://depshield.github.io)
