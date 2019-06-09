@@ -49,25 +49,42 @@ if [ $(pip3 list 2> /dev/null| grep -c scapy) -lt 1 ]
 		sudo pip3 install --pre scapy
 fi
 
-if [ $(pip3 list 2> /dev/null| grep -c readchar) -lt 1 ]
+if [ $(pip3 list 2> /dev/null| grep -c pycryptodome) -lt 1 ]
         then
-                echo "READCHAR isn't installed! Installing now.."
-                sudo pip3 install readchar
+                echo "PYCRYPTODOME isn't installed! Installing now.."
+                sudo pip3 install pycryptodome
 fi
 
 
 echo -n "Your name (One Word): "
 read name
-echo
 
 export NAME="$name"
 
 export CODE=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)
 
+
+echo -n "Channel Key (16 chars OR [R] for random key OR [D] for default key): "
+read KEY
+
+if [[ $KEY =~ ^[Rr]$ ]]
+	then
+		export CH_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+		echo "Channel key = $CH_KEY. Write this down!"
+		read -p "Press a key to continue!" -n 1 -r
+	else
+		if [[ $KEY =~ ^[Dd]$ ]]
+			then
+				export CH_KEY="0000000000000000"
+			else
+				export CH_KEY="$KEY"
+		fi
+fi
+
 echo "split" >> screentemp
-echo "screen /bin/bash -c 'sudo ./rx_arp.py -d -c$CODE'" >> screentemp
+echo "screen /bin/bash -c 'sudo ./rx_arp.py -d -c$CODE -k$CH_KEY'" >> screentemp
 echo "focus" >> screentemp
-echo "screen /bin/bash -c 'sudo ./tx_arp.py -d -c$CODE $NAME'" >> screentemp
+echo "screen /bin/bash -c 'sudo ./tx_arp.py -d -c$CODE $NAME -k$CH_KEY'" >> screentemp
 echo 'caption string "ARPChat, Charlie Camilleri 2019"' >> screentemp
 
 screen -c screentemp

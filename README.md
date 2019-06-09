@@ -14,4 +14,4 @@ The script installs the following packages:
   python3<br>
   python3-pip<br>
   scapy<br>
-  readchar</code>
+  pycryptodome</code>
