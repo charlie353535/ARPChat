@@ -6,7 +6,7 @@ python:
 
 install:
   - sudo apt install -y tcpdump python3
-  - sudo pip3 install --pre scapy
-  - sudo pip3 install -r requirements.txt
+  - sudo pip install --pre scapy
+  - sudo pip install -r requirements.txt
 
 script: sudo ./test.sh
