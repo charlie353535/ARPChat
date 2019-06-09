@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Charlie Camilleri, 2019
+
 clear
 
 echo "==ARPChat, Charlie Camilleri 2019=="
