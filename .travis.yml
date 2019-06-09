@@ -1,11 +1,12 @@
 language: python
+dist: bionic
 python:
   - "3.6"
   - "3.7"
 
 install:
-  - apt install -y tcpdump
-  - pip install --pre scapy
-  - pip install -r requirements.txt
+  - sudo apt install -y tcpdump
+  - sudo pip install --pre scapy
+  - sudo pip install -r requirements.txt
 
-script: ./test.sh
+script: sudo ./test.sh
