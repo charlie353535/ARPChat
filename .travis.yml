@@ -4,7 +4,6 @@ python:
 cache: pip
 addons:
   apt:
-    update: true
     packages:
       - "python3.6"
       - "python3.6-pip"
