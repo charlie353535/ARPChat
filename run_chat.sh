@@ -66,7 +66,7 @@ export NAME="$name"
 export CODE=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1)
 
 
-echo -n "Channel Key (16 chars OR [R] for random key OR [D] for default key): "
+echo -n "AES Channel Key (16 chars OR [R] for random key OR [D] for default key): "
 read KEY
 
 if [[ $KEY =~ ^[Rr]$ ]]
