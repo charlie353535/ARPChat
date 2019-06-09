@@ -9,7 +9,9 @@ addons:
       - "python3-pip"
 
 install:
-  - sudo pip3.6 install --pre scapy
-  - sudo pip3.6 install -r requirements.txt
+  - sudo pip3 install --upgrade setuptools
+  - sudo pip3 install --upgrade pip
+  - sudo pip3 install --pre scapy
+  - sudo pip3 install -r requirements.txt
 
 script: sudo ./test.sh
