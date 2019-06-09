@@ -1,2 +1,2 @@
-scapy
+--pre scapy
 pycryptodome
