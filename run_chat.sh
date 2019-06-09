@@ -79,7 +79,13 @@ if [[ $KEY =~ ^[Rr]$ ]]
 			then
 				export CH_KEY="0000000000000000"
 			else
-				export CH_KEY="$KEY"
+				if [ ${#KEY} -ne 16 ]
+					then
+						echo "ERROR! Use a 16 char key!"
+						exit
+				else
+					export CH_KEY="$KEY"
+				fi
 		fi
 fi
 
