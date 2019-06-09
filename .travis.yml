@@ -1,12 +1,16 @@
 language: python
-dist: trusty
 python:
   - "3.6"
   - "3.7"
+cache: pip
+addons:
+  apt:
+    packages:
+      - "python3"
+      - "python3-pip"
 
 install:
-  - sudo apt install -y tcpdump python3
-  - sudo pip install --pre scapy
-  - sudo pip install -r requirements.txt
+  - sudo pip3 install --pre scapy
+  - sudo pip3 install -r requirements.txt
 
 script: sudo ./test.sh
